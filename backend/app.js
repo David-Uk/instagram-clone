@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -7,6 +8,9 @@ const MONGO_URL = 'mongodb://127.0.0.1:27017/';
 
 // Import user model
 require('./models/User');
+
+app.use(bodyParser.json())
+app.use(require('./routes/auth'));
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
