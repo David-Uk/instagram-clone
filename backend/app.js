@@ -9,9 +9,11 @@ const PORT = process.env.PORT || 5000;
 
 // Import user model
 require('./models/User');
+require('./models/Posts');
 
 app.use(bodyParser.json())
 app.use(require('./routes/auth'));
+app.use(require('./routes/post'));
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
