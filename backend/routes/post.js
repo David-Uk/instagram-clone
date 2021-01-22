@@ -5,6 +5,13 @@ const User = require('../models/User');
 const Post = require('../models/Posts');
 const requiredLogin = require('../middleware/requiredLogin')
 
+router.get('/allposts', (req, res) => {
+    Post.find()
+        .populate('postedBy', '_id name')
+        .then(posts => res.status(200).json({ posts }))
+        .catch(err => console.log(err))
+})
+
 router.post('/createpost', requiredLogin, (req, res) => {
     const { title, body } = req.body
     if (!title || !body) return res.status(422).json({ error: "All fields are required!" })
